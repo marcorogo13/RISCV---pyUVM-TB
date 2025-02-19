@@ -1,0 +1,61 @@
+CAPI=2:
+
+name: cocotb:tb_only:cve2_core:1.0.0
+
+filesets:
+  files_rtl:
+      depend:
+        - openhwgroup:cve2:cve2_core:0.1 
+
+  cocotb:
+    files:
+       - tb_src/core_agent.py: {file_type : user, copyto : .}
+       - tb_src/core_data_item.py: {file_type : user, copyto : .}
+       - tb_src/core_data_model.py: {file_type : user, copyto : .}
+       - tb_src/core_driver.py: {file_type : user, copyto : .}
+       - tb_src/core_env.py: {file_type : user, copyto : .}
+       - tb_src/core_instr_item.py: {file_type : user, copyto : .}
+       - tb_src/core_instr_model.py: {file_type : user, copyto : .}
+       - tb_src/core_interface.py: {file_type : user, copyto : .}
+       - tb_src/core_item.py: {file_type : user, copyto : .}
+       - tb_src/core_fsm_item.py: {file_type : user, copyto : .}
+       - tb_src/core_monitor.py: {file_type : user, copyto : .}
+       - tb_src/core_fsm_coverage.py: {file_type : user, copyto : .}
+       - tb_src/core_func_coverage.py: {file_type : user, copyto : .}
+       - tb_src/core_predictor.py: {file_type : user, copyto : .}
+       - tb_src/core_scoreboard.py: {file_type : user, copyto : .}
+       - tb_src/core_test.py: {file_type : user, copyto : .}
+    file_type: pythonSource
+
+  input_files:
+    files:
+      - mem_write.log: {file_type : user, copyto : .}
+      - instr_mem.vmem: {file_type : user, copyto : .}
+      - data_mem.vmem: {file_type : user, copyto : .}
+    file_type: user
+
+
+parameters:
+  RVFI:
+    datatype: bool
+    paramtype: vlogdefine
+    default: true
+
+targets:
+  default: &default
+    filesets: 
+      - cocotb
+      - input_files
+      - files_rtl
+    parameters:
+      - RVFI=true
+    toplevel: cve2_core
+
+  sim: 
+    <<: *default
+    flow: sim
+    flow_options:
+      tool: verilator
+      verilator_options:
+        - --coverage-line
+      cocotb_module: core_test

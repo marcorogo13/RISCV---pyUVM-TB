@@ -1,0 +1,9 @@
+cve2_R_type: 90.00%
+cve2_I_type: 88.89%
+cve2_RM_type: 100.00%
+cve2_S_type: 100.00%
+cve2_B_type: 100.00%
+cve2_U_type: 100.00%
+cve2_J_type: 100.00%
+cve2_C_type: 37.50%
+cve2_rg_dep: 71.43%

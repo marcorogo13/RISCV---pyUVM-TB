@@ -1,0 +1,154 @@
+
+test.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00100000 <_start>:
+  100000:	4081                	li	ra,0
+  100002:	4101                	li	sp,0
+  100004:	4181                	li	gp,0
+  100006:	4201                	li	tp,0
+  100008:	4281                	li	t0,0
+  10000a:	4301                	li	t1,0
+  10000c:	4381                	li	t2,0
+  10000e:	4401                	li	s0,0
+  100010:	4481                	li	s1,0
+  100012:	4501                	li	a0,0
+  100014:	4581                	li	a1,0
+  100016:	4601                	li	a2,0
+  100018:	4681                	li	a3,0
+  10001a:	4701                	li	a4,0
+  10001c:	4781                	li	a5,0
+  10001e:	4801                	li	a6,0
+  100020:	4881                	li	a7,0
+  100022:	4901                	li	s2,0
+  100024:	4981                	li	s3,0
+  100026:	4a01                	li	s4,0
+  100028:	4a81                	li	s5,0
+  10002a:	4b01                	li	s6,0
+  10002c:	4b81                	li	s7,0
+  10002e:	4c01                	li	s8,0
+  100030:	4c81                	li	s9,0
+  100032:	4d01                	li	s10,0
+  100034:	4d81                	li	s11,0
+  100036:	4e01                	li	t3,0
+  100038:	4e81                	li	t4,0
+  10003a:	4f01                	li	t5,0
+  10003c:	4f81                	li	t6,0
+  10003e:	00038117          	auipc	sp,0x38
+  100042:	fc210113          	addi	sp,sp,-62 # 138000 <_stack_start>
+  100046:	01a000ef          	jal	ra,100060 <test_function>
+  10004a:	000202b7          	lui	t0,0x20
+  10004e:	02a1                	addi	t0,t0,8
+  100050:	4305                	li	t1,1
+  100052:	0062a023          	sw	t1,0(t0) # 20000 <_stack_len+0x18000>
+  100056:	8082                	ret
+
+00100058 <halt>:
+  100058:	a001                	j	100058 <halt>
+  10005a:	0001                	nop
+  10005c:	0001                	nop
+  10005e:	0001                	nop
+
+00100060 <test_function>:
+  100060:	00038117          	auipc	sp,0x38
+  100064:	fa010113          	addi	sp,sp,-96 # 138000 <_stack_start>
+  100068:	1171                	addi	sp,sp,-4
+  10006a:	c006                	sw	ra,0(sp)
+  10006c:	02a00093          	li	ra,42
+  100070:	4109                	li	sp,2
+  100072:	402080b3          	sub	ra,ra,sp
+  100076:	0220f1b3          	remu	gp,ra,sp
+  10007a:	0220d233          	divu	tp,ra,sp
+  10007e:	00038117          	auipc	sp,0x38
+  100082:	f8210113          	addi	sp,sp,-126 # 138000 <_stack_start>
+  100086:	1171                	addi	sp,sp,-4
+  100088:	00000097          	auipc	ra,0x0
+  10008c:	01008093          	addi	ra,ra,16 # 100098 <store_registers>
+  100090:	008000ef          	jal	ra,100098 <store_registers>
+  100094:	4082                	lw	ra,0(sp)
+  100096:	0111                	addi	sp,sp,4
+
+00100098 <store_registers>:
+  100098:	c206                	sw	ra,4(sp)
+  10009a:	c40a                	sw	sp,8(sp)
+  10009c:	c60e                	sw	gp,12(sp)
+  10009e:	c812                	sw	tp,16(sp)
+  1000a0:	ca16                	sw	t0,20(sp)
+  1000a2:	cc1a                	sw	t1,24(sp)
+  1000a4:	ce1e                	sw	t2,28(sp)
+  1000a6:	d022                	sw	s0,32(sp)
+  1000a8:	d226                	sw	s1,36(sp)
+  1000aa:	d42a                	sw	a0,40(sp)
+  1000ac:	d62e                	sw	a1,44(sp)
+  1000ae:	d832                	sw	a2,48(sp)
+  1000b0:	da36                	sw	a3,52(sp)
+  1000b2:	dc3a                	sw	a4,56(sp)
+  1000b4:	de3e                	sw	a5,60(sp)
+  1000b6:	c0c2                	sw	a6,64(sp)
+  1000b8:	c2c6                	sw	a7,68(sp)
+  1000ba:	c4ca                	sw	s2,72(sp)
+  1000bc:	c6ce                	sw	s3,76(sp)
+  1000be:	c8d2                	sw	s4,80(sp)
+  1000c0:	cad6                	sw	s5,84(sp)
+  1000c2:	ccda                	sw	s6,88(sp)
+  1000c4:	cede                	sw	s7,92(sp)
+  1000c6:	d0e2                	sw	s8,96(sp)
+  1000c8:	d2e6                	sw	s9,100(sp)
+  1000ca:	d4ea                	sw	s10,104(sp)
+  1000cc:	d6ee                	sw	s11,108(sp)
+  1000ce:	d8f2                	sw	t3,112(sp)
+  1000d0:	daf6                	sw	t4,116(sp)
+  1000d2:	dcfa                	sw	t5,120(sp)
+  1000d4:	defe                	sw	t6,124(sp)
+  1000d6:	00000297          	auipc	t0,0x0
+  1000da:	c116                	sw	t0,128(sp)
+  1000dc:	8082                	ret
+
+001000de <_start>:
+  1000de:	4081                	li	ra,0
+  1000e0:	4101                	li	sp,0
+  1000e2:	4181                	li	gp,0
+  1000e4:	4201                	li	tp,0
+  1000e6:	4281                	li	t0,0
+  1000e8:	4301                	li	t1,0
+  1000ea:	4381                	li	t2,0
+  1000ec:	4401                	li	s0,0
+  1000ee:	4481                	li	s1,0
+  1000f0:	4501                	li	a0,0
+  1000f2:	4581                	li	a1,0
+  1000f4:	4601                	li	a2,0
+  1000f6:	4681                	li	a3,0
+  1000f8:	4701                	li	a4,0
+  1000fa:	4781                	li	a5,0
+  1000fc:	4801                	li	a6,0
+  1000fe:	4881                	li	a7,0
+  100100:	4901                	li	s2,0
+  100102:	4981                	li	s3,0
+  100104:	4a01                	li	s4,0
+  100106:	4a81                	li	s5,0
+  100108:	4b01                	li	s6,0
+  10010a:	4b81                	li	s7,0
+  10010c:	4c01                	li	s8,0
+  10010e:	4c81                	li	s9,0
+  100110:	4d01                	li	s10,0
+  100112:	4d81                	li	s11,0
+  100114:	4e01                	li	t3,0
+  100116:	4e81                	li	t4,0
+  100118:	4f01                	li	t5,0
+  10011a:	4f81                	li	t6,0
+  10011c:	00038117          	auipc	sp,0x38
+  100120:	ee410113          	addi	sp,sp,-284 # 138000 <_stack_start>
+  100124:	f3dff0ef          	jal	ra,100060 <test_function>
+  100128:	000202b7          	lui	t0,0x20
+  10012c:	02a1                	addi	t0,t0,8
+  10012e:	4305                	li	t1,1
+  100130:	0062a023          	sw	t1,0(t0) # 20000 <_stack_len+0x18000>
+  100134:	8082                	ret
+
+00100136 <halt>:
+  100136:	a001                	j	100136 <halt>
+  100138:	0001                	nop
+  10013a:	0001                	nop
+  10013c:	0001                	nop

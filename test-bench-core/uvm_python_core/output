@@ -1,0 +1,20 @@
+cd ../sw && \
+make clean && \
+make && \
+cp test.vmem ../uvm_python_core/instr_mem.vmem && \
+riscv32-unknown-elf-objdump -d test.elf > ../uvm_python_core/test.dump
+make[1]: Entering directory '/home/thesis/marcorosa.gobbo/2024-gobbo/sw'
+rm -f -f ./exception_handling.o ./test_function.o ./store_registers.o ./crt0.o  *.d
+make[1]: Leaving directory '/home/thesis/marcorosa.gobbo/2024-gobbo/sw'
+make[1]: Entering directory '/home/thesis/marcorosa.gobbo/2024-gobbo/sw'
+/software/x-heep/riscv-centos/bin/riscv32-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -static -mcmodel=medany -Wall -g -Os -O0 -fvisibility=hidden -nostdlib -nostartfiles -ffreestanding -MMD -c -o exception_handling.o exception_handling.S
+/software/x-heep/riscv-centos/bin/riscv32-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -static -mcmodel=medany -Wall -g -Os -O0 -fvisibility=hidden -nostdlib -nostartfiles -ffreestanding -MMD -c -o test_function.o test_function.S
+/software/x-heep/riscv-centos/bin/riscv32-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -static -mcmodel=medany -Wall -g -Os -O0 -fvisibility=hidden -nostdlib -nostartfiles -ffreestanding -MMD -c -o store_registers.o store_registers.S
+/software/x-heep/riscv-centos/bin/riscv32-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -static -mcmodel=medany -Wall -g -Os -O0 -fvisibility=hidden -nostdlib -nostartfiles -ffreestanding -MMD -c -o crt0.o crt0.S
+/software/x-heep/riscv-centos/bin/riscv32-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -static -mcmodel=medany -Wall -g -Os -O0 -fvisibility=hidden -nostdlib -nostartfiles -ffreestanding -T ./link_crt0.ld ./exception_handling.o ./test_function.o ./store_registers.o ./crt0.o  -o test.elf 
+/software/x-heep/riscv-centos/bin/riscv32-unknown-elf-objcopy -O binary test.elf test.bin
+/software/x-heep/riscv-centos/bin/riscv32-unknown-elf-objcopy --reverse-bytes=4 --verilog-data-width=4 -I binary -O verilog test.bin test.vmem
+# change the first line of the output file with @00100000
+sed -i '1s/^.*$/@00100000/' test.vmem
+make[1]: Leaving directory '/home/thesis/marcorosa.gobbo/2024-gobbo/sw'
+/home/thesis/marcorosa.gobbo/2024-gobbo/uvm_python_core/../spike/spike.sh /home/thesis/marcorosa.gobbo/2024-gobbo/uvm_python_core/../sw/test.elf

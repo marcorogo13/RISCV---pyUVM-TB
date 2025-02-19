@@ -1,0 +1,27 @@
+LA x9, _stack_start
+SB x26, 4(x9)
+ADDI x28, x0, 430
+ADDI x8, x0, -1194
+BNE x28, x8, target_branch1
+ADDI x0, x0, 0
+ADDI x0, x0, 0
+ADDI x0, x0, 0
+ADDI x0, x0, 0
+target_branch1:
+ADD x26, x25, x5
+ADD x5, x5, x3
+LA x7, _stack_start
+SW x31, 4(x7)
+LA x13, _stack_start
+SB x7, 4(x13)
+ADDI x29, x0, 809
+ADDI x31, x0, -353
+BGEU x29, x31, target_branch6
+ADDI x0, x0, 0
+ADDI x0, x0, 0
+target_branch6:
+LUI x15, 806724
+LA x21, _stack_start
+SW x28, 4(x21)
+LA x29, _stack_start
+LH x2, 4(x29)
